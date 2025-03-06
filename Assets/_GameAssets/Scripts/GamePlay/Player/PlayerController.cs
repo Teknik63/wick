@@ -161,6 +161,10 @@ public class PlayerController : MonoBehaviour
         _canJump = true;
     }
 
+    public Rigidbody GetPlayerRigidbody()
+    {
+        return _rigidbodyPlayer;
+    }
     #region Helper Functions
     private bool IsGrounded()
     {

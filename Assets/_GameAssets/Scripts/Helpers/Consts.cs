@@ -17,5 +17,10 @@ public class Consts
         public const string ROTTEN_WHEAT = "RottenWheat";
     }
 
+    public struct Spatula_Anim
+    {
+        public const string IS_SPATULA_Anim = "IsSpatulaJumping";
+    }
+
  
 }
