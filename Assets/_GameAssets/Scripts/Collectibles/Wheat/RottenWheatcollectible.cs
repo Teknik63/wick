@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RottenWheatcollectible : MonoBehaviour
+public class RottenWheatcollectible : MonoBehaviour,ICollectible
 {
     [SerializeField] private PlayerController _playController;
     [SerializeField] private float _decraseMovementSpeed;
