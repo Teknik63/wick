@@ -35,6 +35,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private float _groundDrag;
 
+
+
+    private float _startMovementSpeed, _startJumpForce;
     private StateController _stateController;
     private Rigidbody _rigidbodyPlayer;
     private float _horizontalInput, _verticalInput;
@@ -46,6 +49,8 @@ public class PlayerController : MonoBehaviour
         _stateController = GetComponent<StateController>();
         _rigidbodyPlayer = GetComponent<Rigidbody>();
         _rigidbodyPlayer.freezeRotation = true;
+        _startMovementSpeed = _movementSpeed;
+        _startJumpForce = _jumpForce;
     }
     private void Update()
     {
@@ -156,6 +161,7 @@ public class PlayerController : MonoBehaviour
         _canJump = true;
     }
 
+    #region Helper Functions
     private bool IsGrounded()
     {
         return Physics.Raycast(transform.position, Vector3.down, _playerHeight * 0.5f + 0.2f,_groundLayer);
@@ -170,4 +176,27 @@ public class PlayerController : MonoBehaviour
     {
         return isSliding;
     }
+
+    public void SetMovementSpeed(float speed,int duration)
+    {
+        _movementSpeed += speed;
+        Invoke(nameof(ResetMovemenetSpeed), duration);
+    }
+
+    private void ResetMovemenetSpeed()
+    {
+        _movementSpeed = _startMovementSpeed;
+    }
+
+    public void SetJumpforce(float force ,int duration)
+    {
+        _jumpForce += force;
+        Invoke(nameof(ResetJumpForce), duration);
+    }
+
+    private void ResetJumpForce()
+    {
+        _jumpForce = _startJumpForce;
+    }
+    #endregion
 }
