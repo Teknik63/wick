@@ -177,7 +177,7 @@ public class PlayerController : MonoBehaviour
         return isSliding;
     }
 
-    public void SetMovementSpeed(float speed,int duration)
+    public void SetMovementSpeed(float speed,float duration)
     {
         _movementSpeed += speed;
         Invoke(nameof(ResetMovemenetSpeed), duration);
@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour
         _movementSpeed = _startMovementSpeed;
     }
 
-    public void SetJumpforce(float force ,int duration)
+    public void SetJumpforce(float force ,float duration)
     {
         _jumpForce += force;
         Invoke(nameof(ResetJumpForce), duration);
