@@ -15,6 +15,7 @@ public class TimerUI : MonoBehaviour
     private float _elapsedTimer;
     private bool _isTimerRunning;
     private Tween _rotationTween;
+    private string _finalTimer;
 
     private void Awake()
     {
@@ -32,10 +33,13 @@ public class TimerUI : MonoBehaviour
         switch (gameState)
         {
             case GameState.Pause:
-                PauseTimer();
+                StopTimer();
                 break;
             case GameState.Resume:
                 ResumeTimer();
+                break;
+            case GameState.GameOver:
+                FinishTimer();
                 break;
         }
     }
@@ -51,7 +55,7 @@ public class TimerUI : MonoBehaviour
         _elapsedTimer = 0f;
         InvokeRepeating(nameof(UpdateTimerUI), 0f, 1f);
     }
-    private void PauseTimer()
+    private void StopTimer()
     {
         _isTimerRunning= false;
         CancelInvoke(nameof(UpdateTimerUI));
@@ -68,6 +72,20 @@ public class TimerUI : MonoBehaviour
         }
     }
 
+    private void FinishTimer()
+    {
+        StopTimer();
+        _finalTimer = GetformattedElapsedTime();
+    }
+
+    public string GetformattedElapsedTime()
+    {
+        int minutes = Mathf.FloorToInt(_elapsedTimer / 60f);
+        int second = Mathf.FloorToInt(_elapsedTimer % 60f);
+
+       return string.Format("{0:00}:{1:00}", minutes, second);
+    }
+
     private void UpdateTimerUI()
     {
         if (!_isTimerRunning) { return; }
@@ -77,5 +95,10 @@ public class TimerUI : MonoBehaviour
         int second = Mathf.FloorToInt(_elapsedTimer % 60f);
 
         _timerText.text = string.Format("{0:00}:{1:00}", minutes, second);
+    }
+
+    public string GetFinalTime()
+    {
+        return _finalTimer;
     }
 }

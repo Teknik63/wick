@@ -22,5 +22,10 @@ public class Consts
         public const string IS_SPATULA_Anim = "IsSpatulaJumping";
     }
 
+    public struct Scene_Names
+    {
+        public const string GAME_MAIN_SCENE = "GameScene";
+    }
+
  
 }
